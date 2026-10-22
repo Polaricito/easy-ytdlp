@@ -6,11 +6,11 @@ APP_NAME="ytdlp-gui"
 APP_DIR="${APP_NAME}.AppDir"
 DESKTOP_FILE="${APP_NAME}.desktop"
 MAIN_SCRIPT="main.py"
-APP_ICON_SRC="/home/meowl/Downloads/yt-dlp.png"
 HOME_DIR="$HOME"
 
 WORKDIR="$(cd "$(dirname "$0")" && pwd)"
 cd "$WORKDIR"
+APP_ICON_SRC="${WORKDIR}/assets/icon.png"
 
 # ── Clean previous build ──────────────────────────────────
 echo "🧹 Cleaning previous build..."
@@ -32,6 +32,7 @@ pyinstaller \
   --specpath . \
   --hidden-import "sv_ttk" \
   --hidden-import "yt_dlp" \
+  --add-data "assets:assets" \
   --paths "$HOME/.local/lib/python3.14/site-packages" \
   "${MAIN_SCRIPT}" 2>&1
 
